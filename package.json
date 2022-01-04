@@ -1,0 +1,34 @@
+{
+  "name": "circleci-parallelism-option-test",
+  "version": "1.0.0",
+  "description": "Testing the behavior of CircleCI parallelism option",
+  "main": "lib/src/index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yujiosaka/circleci-parallelism-option-test.git"
+  },
+  "keywords": [
+    "circleci",
+    "parallelism",
+    "demo",
+    "test",
+    "jest"
+  ],
+  "author": "Yuji Isobe",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/yujiosaka/circleci-parallelism-option-test/issues"
+  },
+  "homepage": "https://github.com/yujiosaka/circleci-parallelism-option-test#readme",
+  "devDependencies": {
+    "@types/jest": "27.4.0",
+    "jest": "27.4.5",
+    "jest-junit": "13.0.0",
+    "ts-jest": "27.1.2",
+    "typescript": "4.5.4"
+  }
+}

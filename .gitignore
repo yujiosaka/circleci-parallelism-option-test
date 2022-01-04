@@ -102,3 +102,6 @@ dist
 
 # TernJS port file
 .tern-port
+
+# Report directory used by tools like jest-junit
+reports

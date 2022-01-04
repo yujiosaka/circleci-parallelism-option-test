@@ -1,0 +1,46 @@
+version: 2.1
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - build
+      - test:
+          requires:
+            - build
+
+jobs:
+  build:
+    docker:
+      - image: circleci/node:latest
+
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "package.json" }}
+          - v1-dependencies-
+      - run: npm install
+      - save_cache:
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - project
+
+  test:
+    parallelism: 3
+
+    docker:
+      - image: circleci/node:latest
+
+    steps:
+      - attach_workspace:
+          at: ~/
+      - run: npm test -- --ci --runInBand $(circleci tests glob '__tests__/*.spec.ts' | sed s/__tests__\\///g | circleci tests split --split-by=timings --timings-type=classname)
+      - store_test_results:
+          path: ./reports/junit/
+      - store_artifacts:
+          path: ./reports/junit
